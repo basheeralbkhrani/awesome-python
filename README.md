@@ -1,3 +1,16 @@
+# Create the plot
+p <- ggplot(complications, aes(x=reorder(Complication, -Prevalence), y=Prevalence)) +
+  geom_bar(stat="identity", fill="steelblue", alpha=0.7) +
+  geom_errorbar(aes(ymin=Lower_CI, ymax=Upper_CI), width=0.2, color="darkred") +
+  geom_text(aes(label=sprintf("%d%%", Prevalence)), vjust=-0.5, size=4) +
+  labs(title="Prevalence of Complications with Confidence Intervals",
+       x="Complication",
+       y="Prevalence (%)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle=45, hjust=1))
+
+# Save the plot as a PNG file
+ggsave("complications_plot.png", plot = p, width = 8, height = 5, dpi = 300)
 # Awesome Python [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
 An opinionated list of awesome Python frameworks, libraries, software and resources.
